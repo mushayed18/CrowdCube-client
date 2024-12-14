@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ const Header = () => {
   );
 
   return (
-    <div className="border-2 w-11/12 mx-auto flex items-center justify-between py-4">
+    <div className="w-11/12 mx-auto flex items-center justify-between py-4">
       <div className="flex items-center gap-2">
         <div
           className="lg:hidden cursor-pointer"
@@ -36,7 +37,8 @@ const Header = () => {
         {navbar}
       </div>
 
-      <div>
+      <div className="flex gap-2 items-center">
+        <ThemeToggle></ThemeToggle>
         <button className="btn bg-my-red text-my-gray">Register</button>
       </div>
 
