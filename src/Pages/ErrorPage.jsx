@@ -12,7 +12,7 @@ export default function ErrorPage() {
   return (
     <div
       id="error-page"
-      className="min-h-screen flex flex-col items-center justify-center border-2 gap-5"
+      className="min-h-screen flex flex-col items-center justify-center gap-5"
     >
       <h1 className="font-bold text-5xl text-center">Oops!</h1>
       <p className="text-2xl text-center">Sorry, an unexpected error has occurred.</p>

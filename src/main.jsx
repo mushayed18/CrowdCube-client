@@ -9,6 +9,12 @@ import {
 } from "react-router-dom";
 import ErrorPage from './Pages/ErrorPage.jsx';
 import Home from './Pages/Home.jsx';
+import AllCampaign from './Pages/AllCampaign.jsx';
+import AddNewCampaign from './Pages/AddNewCampaign.jsx';
+import MyCampaign from './Pages/MyCampaign.jsx';
+import MyDonations from './Pages/MyDonations.jsx';
+import Login from './Pages/Login.jsx';
+import Register from './Pages/Register.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +25,30 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/all-campaign",
+        element: <AllCampaign></AllCampaign>,
+      },
+      {
+        path: "/add-new-campaign",
+        element: <AddNewCampaign></AddNewCampaign>,
+      },
+      {
+        path: "/my-campaign",
+        element: <MyCampaign></MyCampaign>,
+      },
+      {
+        path: "/my-donations",
+        element: <MyDonations></MyDonations>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
     ],
   },
