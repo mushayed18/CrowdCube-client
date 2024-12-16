@@ -160,7 +160,7 @@ const AddNewCampaign = () => {
             />
           </div>
 
-          <button className="btn w-full bg-my-gray text-my-red">
+          <button className="btn w-full border-my-gray text-my-red">
             Add Campaign
           </button>
         </form>

@@ -13,6 +13,7 @@ import MyDonations from "./Pages/MyDonations.jsx";
 import Login from "./Pages/Login.jsx";
 import Register from "./Pages/Register.jsx";
 import AuthProvider from "./Provider/AuthProvider.jsx";
+import Details from "./Pages/Details.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       {
         path: "/all-campaign",
         element: <AllCampaign></AllCampaign>,
+        loader: () => fetch('http://localhost:5000/campaigns')
       },
       {
         path: "/add-new-campaign",
@@ -47,6 +49,11 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/campaigns/:id",
+        element: <Details></Details>,
+        loader: ({params}) => fetch(`http://localhost:5000/campaigns/${params.id}`)
       },
     ],
   },
