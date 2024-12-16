@@ -1,20 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import ErrorPage from './Pages/ErrorPage.jsx';
-import Home from './Pages/Home.jsx';
-import AllCampaign from './Pages/AllCampaign.jsx';
-import AddNewCampaign from './Pages/AddNewCampaign.jsx';
-import MyCampaign from './Pages/MyCampaign.jsx';
-import MyDonations from './Pages/MyDonations.jsx';
-import Login from './Pages/Login.jsx';
-import Register from './Pages/Register.jsx';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./Pages/ErrorPage.jsx";
+import Home from "./Pages/Home.jsx";
+import AllCampaign from "./Pages/AllCampaign.jsx";
+import AddNewCampaign from "./Pages/AddNewCampaign.jsx";
+import MyCampaign from "./Pages/MyCampaign.jsx";
+import MyDonations from "./Pages/MyDonations.jsx";
+import Login from "./Pages/Login.jsx";
+import Register from "./Pages/Register.jsx";
+import AuthProvider from "./Provider/AuthProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,8 +52,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-)
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </StrictMode>
+);
