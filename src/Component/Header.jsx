@@ -15,7 +15,7 @@ const Header = () => {
       <NavLink to="/">Home</NavLink>
       <NavLink to="/all-campaign">All Campaign</NavLink>
       <NavLink to="/add-new-campaign">Add New Campaign</NavLink>
-      <NavLink to="/my-campaign">My Campaign</NavLink>
+      <NavLink to={`/my-campaigns/${user?.email}`}>My Campaign</NavLink>
       <NavLink to="/my-donations">My Donations</NavLink>
     </>
   );

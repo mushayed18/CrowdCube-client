@@ -7,7 +7,14 @@ import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEyeSlash } from "react-icons/fa6";
 
 const Register = () => {
-  const { createUser, user, setUser, updateUserProfile, signInWithGoogle, loading } = useContext(AuthContext);
+  const {
+    createUser,
+    user,
+    setUser,
+    updateUserProfile,
+    signInWithGoogle,
+    loading,
+  } = useContext(AuthContext);
 
   const [visibility, setVisibility] = useState(false);
 
@@ -21,10 +28,20 @@ const Register = () => {
 
   const handleGoogleBtn = () => {
     signInWithGoogle().then((result) => {
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({name: result.user.displayName, email:result.user.email})
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+
       setUser(result.user);
-      navigate('/');
-    })
-  }
+      navigate("/");
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,9 +69,22 @@ const Register = () => {
         });
 
         setUser(result.user);
+
+        const newUser = {name, email};
+
         updateUserProfile({ displayName: name, photoURL: photo }).then(() => {
-          navigate('/');
-          setValid('');
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser)
+          })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+
+          navigate("/");
+          setValid("");
         });
       })
       .catch((error) => {

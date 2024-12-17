@@ -35,8 +35,9 @@ const router = createBrowserRouter([
         element: <AddNewCampaign></AddNewCampaign>,
       },
       {
-        path: "/my-campaign",
+        path: "/my-campaigns/:email",
         element: <MyCampaign></MyCampaign>,
+        loader: ({params}) => fetch(`http://localhost:5000/my-campaigns/${params.email}`) 
       },
       {
         path: "/my-donations",

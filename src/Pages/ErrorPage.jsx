@@ -1,4 +1,5 @@
 import { useNavigate, useRouteError } from "react-router-dom";
+import { IoMdArrowBack } from "react-icons/io";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -20,7 +21,7 @@ export default function ErrorPage() {
         <i>{error.statusText || error.message}</i>
       </p>
       <div className="form-control mt-6">
-        <button onClick={handleBackToHomeBtn} className="btn bg-my-red text-white">Back to Home</button>
+        <button onClick={handleBackToHomeBtn} className="btn rounded-full mt-4 border-my-red"><IoMdArrowBack /></button>
       </div>
     </div>
   );
