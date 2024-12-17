@@ -1,7 +1,47 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBinLine } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 const MyCampaign = () => {
   const campaigns = useLoaderData();
+
+  const navigate = useNavigate()
+
+  const handleUpdateBtn = (id) => {
+    navigate(`/update-campaign/${id}`)
+  }
+
+  const handleDeleteBtn = (id) => {
+    console.log(id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/campaigns/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            if (json.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your campaign has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div className="container mx-auto my-8 px-4">
@@ -33,11 +73,16 @@ const MyCampaign = () => {
                     {campaign.type}
                   </td>
                   <td className="border px-2 md:px-4 py-2 flex justify-center gap-2 lg:gap-4">
-                    <button className="btn bg-my-gray text-my-red text-xs md:text-sm px-2 py-1 md:px-3 md:py-2">
-                      Update
+                    <button onClick={() => handleUpdateBtn(campaign._id)} className="btn bg-my-gray text-my-red text-xs md:text-sm px-2 py-1 md:px-3 md:py-2">
+                      <FiEdit />
                     </button>
-                    <button className="btn btn-danger bg-my-red text-my-gray text-xs md:text-sm px-2 py-1 md:px-3 md:py-2">
-                      Delete
+                    <button
+                      onClick={() => {
+                        handleDeleteBtn(campaign._id);
+                      }}
+                      className="btn btn-danger bg-my-red text-my-gray text-xs md:text-sm px-2 py-1 md:px-3 md:py-2"
+                    >
+                      <RiDeleteBinLine />
                     </button>
                   </td>
                 </tr>

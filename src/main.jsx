@@ -14,6 +14,7 @@ import Login from "./Pages/Login.jsx";
 import Register from "./Pages/Register.jsx";
 import AuthProvider from "./Provider/AuthProvider.jsx";
 import Details from "./Pages/Details.jsx";
+import UpdateCampaign from "./Pages/UpdateCampaign.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
       {
         path: "/campaigns/:id",
         element: <Details></Details>,
+        loader: ({params}) => fetch(`http://localhost:5000/campaigns/${params.id}`)
+      },
+      {
+        path: "/update-campaign/:id",
+        element: <UpdateCampaign></UpdateCampaign>,
         loader: ({params}) => fetch(`http://localhost:5000/campaigns/${params.id}`)
       },
     ],
