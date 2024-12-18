@@ -2,8 +2,9 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import Loading from "../Component/Loading";
 
 const MyCampaign = () => {
   const loadedCampaigns = useLoaderData();
@@ -47,6 +48,18 @@ const MyCampaign = () => {
       }
     });
   };
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (loadedCampaigns) {
+      setLoading(false); 
+    }
+  }, [loadedCampaigns])
+
+  if(loading) {
+    return <Loading></Loading>
+  }
 
   return (
     <div className="container mx-auto my-28 px-4">

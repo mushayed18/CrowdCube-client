@@ -26,10 +26,22 @@ const Details = () => {
     navigate("/all-campaign");
   };
 
-  const {displayName, email: donateEmail} = user;
-  const donationInfo = {title, thumbnail, type, displayName, donateEmail}
+  const { displayName, email: donateEmail } = user;
+  const donationInfo = { title, thumbnail, type, displayName, donateEmail };
 
   const handleDonateBtn = () => {
+    const currentDate = new Date();
+    const campaignDeadline = new Date(deadline);
+
+    if (campaignDeadline < currentDate) {
+      Swal.fire({
+        icon: "error",
+        title: "Donation Not Allowed",
+        text: "The campaign's deadline has passed. You can no longer donate to this campaign.",
+      });
+      return; 
+    }
+
     fetch("http://localhost:5000/all-donations", {
       method: "POST",
       headers: {
@@ -41,7 +53,7 @@ const Details = () => {
       .then((data) => {
         console.log(data);
         console.log(user);
-        
+
         if (data.insertedId) {
           Swal.fire({
             icon: "success",

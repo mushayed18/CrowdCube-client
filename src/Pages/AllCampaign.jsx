@@ -1,12 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
-import { AuthContext } from "../Provider/AuthProvider";
 import Loading from "../Component/Loading";
 
 const AllCampaign = () => {
   const campaigns = useLoaderData();
-
+  const [sortedCampaigns, setSortedCampaigns] = useState([]);
   const navigate = useNavigate();
 
   const handleSeeMore = (_id) => {
@@ -14,10 +13,11 @@ const AllCampaign = () => {
   };
 
 
-  const {loading, setLoading} = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (campaigns) {
+      setSortedCampaigns(campaigns);
       setLoading(false); 
     }
   }, [campaigns])
@@ -26,10 +26,16 @@ const AllCampaign = () => {
     return <Loading></Loading>
   }
 
+  const handleSort = () => {
+    const sorted = [...sortedCampaigns].sort((a, b) => a.minDonation - b.minDonation);
+    setSortedCampaigns(sorted);
+  }
+
   return (
-    <div>
+    <div className="my-20 flex flex-col items-center">
+      <button onClick={handleSort} className="btn text-my-red">Sort by amount</button>
       {campaigns ? (
-        <div className="container mx-auto p-6 my-20">
+        <div className="container mx-auto p-6">
           <h2 className="text-2xl font-bold mb-6 text-center">
             <Typewriter
               words={["All Campaigns"]}
@@ -50,7 +56,7 @@ const AllCampaign = () => {
               </tr>
             </thead>
             <tbody>
-              {campaigns.map((campaign) => (
+              {sortedCampaigns.map((campaign) => (
                 <tr key={campaign._id}>
                   <td className="border px-4 py-2 text-center">
                     {campaign.title}

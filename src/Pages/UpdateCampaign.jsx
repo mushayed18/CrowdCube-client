@@ -1,9 +1,15 @@
 
-import { useLoaderData } from "react-router-dom";
+import { useContext } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const UpdateCampaign = () => {
   const campaign = useLoaderData();
+
+  const {user} = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -37,6 +43,7 @@ const UpdateCampaign = () => {
             text: "Your campaign has been updated.",
           });
           form.reset();
+          navigate(`/my-campaigns/${user?.email}`)
         }
       });
   };
