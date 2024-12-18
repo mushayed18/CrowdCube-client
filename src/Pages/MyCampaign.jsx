@@ -3,16 +3,17 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { Typewriter } from "react-simple-typewriter";
 
 const MyCampaign = () => {
   const loadedCampaigns = useLoaderData();
   const [campaigns, setCampaigns] = useState(loadedCampaigns);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleUpdateBtn = (id) => {
-    navigate(`/update-campaign/${id}`)
-  }
+    navigate(`/update-campaign/${id}`);
+  };
 
   const handleDeleteBtn = (id) => {
     Swal.fire({
@@ -37,7 +38,9 @@ const MyCampaign = () => {
                 text: "Your campaign has been deleted.",
                 icon: "success",
               });
-              const remaining = campaigns.filter(campaign => campaign._id !== id);
+              const remaining = campaigns.filter(
+                (campaign) => campaign._id !== id
+              );
               setCampaigns(remaining);
             }
           });
@@ -46,8 +49,18 @@ const MyCampaign = () => {
   };
 
   return (
-    <div className="container mx-auto my-8 px-4">
-      <h2 className="text-2xl font-bold text-center mb-6">My Campaigns</h2>
+    <div className="container mx-auto my-28 px-4">
+      <h2 className="text-2xl font-bold text-center mb-6">
+        <Typewriter
+          words={["My campaigns"]}
+          loop={true}
+          typeSpeed={50}
+          deleteSpeed={50}
+          delaySpeed={2000}
+          cursor
+          cursorStyle="|"
+        />
+      </h2>
 
       <div className="overflow-x-auto">
         <table className="w-full table-auto border-collapse border border-my-gray">
@@ -75,7 +88,10 @@ const MyCampaign = () => {
                     {campaign.type}
                   </td>
                   <td className="border px-2 md:px-4 py-2 flex justify-center gap-2 lg:gap-4">
-                    <button onClick={() => handleUpdateBtn(campaign._id)} className="btn bg-my-gray text-my-red text-xs md:text-sm px-2 py-1 md:px-3 md:py-2">
+                    <button
+                      onClick={() => handleUpdateBtn(campaign._id)}
+                      className="btn bg-my-gray text-my-red text-xs md:text-sm px-2 py-1 md:px-3 md:py-2"
+                    >
                       <FiEdit />
                     </button>
                     <button
