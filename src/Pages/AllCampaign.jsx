@@ -1,5 +1,8 @@
+import { useContext, useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
+import { AuthContext } from "../Provider/AuthProvider";
+import Loading from "../Component/Loading";
 
 const AllCampaign = () => {
   const campaigns = useLoaderData();
@@ -9,6 +12,19 @@ const AllCampaign = () => {
   const handleSeeMore = (_id) => {
     navigate(`/campaigns/${_id}`);
   };
+
+
+  const {loading, setLoading} = useContext(AuthContext);
+
+  useEffect(() => {
+    if (campaigns) {
+      setLoading(false); 
+    }
+  }, [campaigns])
+
+  if(loading) {
+    return <Loading></Loading>
+  }
 
   return (
     <div>

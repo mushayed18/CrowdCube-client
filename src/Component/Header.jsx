@@ -8,7 +8,7 @@ import { Tooltip } from "react-tooltip";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser, loading } = useContext(AuthContext);
 
   const navbar = (
     <>
@@ -57,7 +57,7 @@ const Header = () => {
           {navbar}
         </div>
 
-        {user && user?.email ? (
+        {user && user?.email || loading === true ? (
           <div className="flex gap-2 items-center">
             <label className="swap swap-rotate">
               <input

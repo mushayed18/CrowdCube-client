@@ -32,7 +32,7 @@ const MyDonations = () => {
           </div>
         </div>
       ) : (
-        <div className="min-h-screen flex items-center justify-center text-3xl font-bold text-my-red">
+        <div className="min-h-96 flex items-center text-center justify-center text-3xl font-bold text-my-red">
           You have not donated yet!
         </div>
       )}

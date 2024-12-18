@@ -69,7 +69,8 @@ const AuthProvider = ({ children }) => {
     gmailAddress,
     setGmailAddress,
     resetPassword,
-    loading
+    loading,
+    setLoading
   };
 
   return (

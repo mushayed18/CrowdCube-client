@@ -15,6 +15,8 @@ import Register from "./Pages/Register.jsx";
 import AuthProvider from "./Provider/AuthProvider.jsx";
 import Details from "./Pages/Details.jsx";
 import UpdateCampaign from "./Pages/UpdateCampaign.jsx";
+import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
+import PrivateSign from "./PrivateRoute/PrivateSign.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,34 +35,34 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-new-campaign",
-        element: <AddNewCampaign></AddNewCampaign>,
+        element: <PrivateRoute><AddNewCampaign></AddNewCampaign></PrivateRoute>,
       },
       {
         path: "/my-campaigns/:email",
-        element: <MyCampaign></MyCampaign>,
+        element: <PrivateRoute><MyCampaign></MyCampaign></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/my-campaigns/${params.email}`) 
       },
       {
         path: "/my-donations/:email",
-        element: <MyDonations></MyDonations>,
+        element: <PrivateRoute><MyDonations></MyDonations></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/my-donations/${params.email}`)
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <PrivateSign><Login></Login></PrivateSign>,
       },
       {
         path: "/register",
-        element: <Register></Register>,
+        element: <PrivateSign><Register></Register></PrivateSign>,
       },
       {
         path: "/campaigns/:id",
-        element: <Details></Details>,
+        element: <PrivateRoute><Details></Details></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/campaigns/${params.id}`)
       },
       {
         path: "/update-campaign/:id",
-        element: <UpdateCampaign></UpdateCampaign>,
+        element: <PrivateRoute><UpdateCampaign></UpdateCampaign></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/campaigns/${params.id}`)
       },
     ],
