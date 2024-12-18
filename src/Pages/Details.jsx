@@ -1,16 +1,57 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Details = () => {
   const campaign = useLoaderData();
 
   const navigate = useNavigate();
 
-  const { title, thumbnail, type, description, minDonation, deadline, email, name } = campaign;
+  const { user } = useContext(AuthContext);
+
+  const {
+    title,
+    thumbnail,
+    type,
+    description,
+    minDonation,
+    deadline,
+    email,
+    name,
+  } = campaign;
 
   const handleBackBtn = () => {
-    navigate('/all-campaign')
-  }
+    navigate("/all-campaign");
+  };
+
+  const {displayName, email: donateEmail} = user;
+  const donationInfo = {title, thumbnail, type, displayName, donateEmail}
+
+  const handleDonateBtn = () => {
+    fetch("http://localhost:5000/all-donations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(donationInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(user);
+        
+        if (data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "You donated Successfully!",
+            text: "Your donation is successful.",
+          });
+          form.reset();
+        }
+      });
+  };
 
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto p-6 my-20 border border-my-gray shadow-md rounded-lg">
@@ -52,12 +93,17 @@ const Details = () => {
 
       <div className="text-center">
         <button
-          onClick={() => alert("Donate functionality will go here!")}
+          onClick={handleDonateBtn}
           className="btn text-my-red border-my-red w-full"
         >
           Donate
         </button>
-        <button onClick={handleBackBtn} className="btn rounded-full mt-4 border-my-red"><IoMdArrowBack /></button>
+        <button
+          onClick={handleBackBtn}
+          className="btn rounded-full mt-4 border-my-red"
+        >
+          <IoMdArrowBack />
+        </button>
       </div>
     </div>
   );

@@ -2,9 +2,11 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const MyCampaign = () => {
-  const campaigns = useLoaderData();
+  const loadedCampaigns = useLoaderData();
+  const [campaigns, setCampaigns] = useState(loadedCampaigns);
 
   const navigate = useNavigate()
 
@@ -13,8 +15,6 @@ const MyCampaign = () => {
   }
 
   const handleDeleteBtn = (id) => {
-    console.log(id);
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -37,6 +37,8 @@ const MyCampaign = () => {
                 text: "Your campaign has been deleted.",
                 icon: "success",
               });
+              const remaining = campaigns.filter(campaign => campaign._id !== id);
+              setCampaigns(remaining);
             }
           });
       }
