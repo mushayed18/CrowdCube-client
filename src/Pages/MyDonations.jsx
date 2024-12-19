@@ -3,6 +3,7 @@ import MyDonation from "../Component/MyDonation";
 import { Typewriter } from "react-simple-typewriter";
 import { useEffect, useState } from "react";
 import Loading from "../Component/Loading";
+import { Helmet } from "react-helmet-async";
 
 const MyDonations = () => {
   const myDonations = useLoaderData();
@@ -21,6 +22,9 @@ const MyDonations = () => {
 
   return (
     <div className="my-28 w-11/12 mx-auto flex flex-col items-center">
+      <Helmet>
+        <title>My Donations | Crowd Cube</title>
+      </Helmet>
       {myDonations.length > 0 ? (
         <div>
           <h2 className="text-2xl font-bold mb-6 text-center">

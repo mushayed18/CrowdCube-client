@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const {
@@ -33,7 +34,10 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({name: result.user.displayName, email:result.user.email})
+        body: JSON.stringify({
+          name: result.user.displayName,
+          email: result.user.email,
+        }),
       })
         .then((response) => response.json())
         .then((json) => console.log(json));
@@ -70,7 +74,7 @@ const Register = () => {
 
         setUser(result.user);
 
-        const newUser = {name, email};
+        const newUser = { name, email };
 
         updateUserProfile({ displayName: name, photoURL: photo }).then(() => {
           fetch("http://localhost:5000/users", {
@@ -78,7 +82,7 @@ const Register = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(newUser)
+            body: JSON.stringify(newUser),
           })
             .then((response) => response.json())
             .then((json) => console.log(json));
@@ -98,6 +102,9 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen mt-14">
+      <Helmet>
+        <title>Register | Crowd Cube</title>
+      </Helmet>
       <div className="w-[90%] md:w-full max-w-md p-6 rounded-lg shadow-2xl my-6 backdrop-blur-lg bg-white/30">
         <h2 className="text-2xl font-bold text-center">Register</h2>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">

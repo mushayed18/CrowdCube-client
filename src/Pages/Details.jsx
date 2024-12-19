@@ -3,6 +3,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Details = () => {
   const campaign = useLoaderData();
@@ -39,7 +40,7 @@ const Details = () => {
         title: "Donation Not Allowed",
         text: "The campaign's deadline has passed. You can no longer donate to this campaign.",
       });
-      return; 
+      return;
     }
 
     fetch("http://localhost:5000/all-donations", {
@@ -67,6 +68,9 @@ const Details = () => {
 
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto p-6 my-20 border border-my-gray shadow-md rounded-lg">
+      <Helmet>
+        <title>Details | Crowd Cube</title>
+      </Helmet>
       <div className="flex justify-center">
         <img
           src={thumbnail}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import Loading from "../Component/Loading";
+import { Helmet } from "react-helmet-async";
 
 const AllCampaign = () => {
   const campaigns = useLoaderData();
@@ -12,28 +13,34 @@ const AllCampaign = () => {
     navigate(`/campaigns/${_id}`);
   };
 
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (campaigns) {
       setSortedCampaigns(campaigns);
-      setLoading(false); 
+      setLoading(false);
     }
-  }, [campaigns])
+  }, [campaigns]);
 
-  if(loading) {
-    return <Loading></Loading>
+  if (loading) {
+    return <Loading></Loading>;
   }
 
   const handleSort = () => {
-    const sorted = [...sortedCampaigns].sort((a, b) => a.minDonation - b.minDonation);
+    const sorted = [...sortedCampaigns].sort(
+      (a, b) => a.minDonation - b.minDonation
+    );
     setSortedCampaigns(sorted);
-  }
+  };
 
   return (
     <div className="my-20 flex flex-col items-center">
-      <button onClick={handleSort} className="btn text-my-red">Sort by amount</button>
+      <Helmet>
+        <title>All campaign | Crowd Cube</title>
+      </Helmet>
+      <button onClick={handleSort} className="btn text-my-red">
+        Sort by amount
+      </button>
       {campaigns ? (
         <div className="container mx-auto p-6">
           <h2 className="text-2xl font-bold mb-6 text-center">

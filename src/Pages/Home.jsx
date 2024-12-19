@@ -1,14 +1,41 @@
 import { Typewriter } from "react-simple-typewriter";
 import SwiperLayout from "../Component/SwiperLayout";
+import { useLoaderData } from "react-router-dom";
+import RunningCampaign from "../Component/RunningCampaign";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
+  const campaigns = useLoaderData();
+
   return (
     <div>
-      <SwiperLayout></SwiperLayout>
+      <Helmet>
+        <title>Home | Crowd Cube</title>
+      </Helmet>
+
+      <SwiperLayout />
 
       <section className="py-16 px-6">
-        <div className="container mx-auto border-2 ">
-          
+        <h2 className="text-3xl font-bold mb-6 text-my-red text-center">
+          <Typewriter
+            words={["Running Campaigns"]}
+            loop={true}
+            typeSpeed={50}
+            deleteSpeed={50}
+            delaySpeed={2000}
+            cursor
+            cursorStyle="|"
+          />
+        </h2>
+        <div className="container mx-auto my-10 grid md:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center">
+          {campaigns.map((campaign) => {
+            return (
+              <RunningCampaign
+                key={campaign._id}
+                campaign={campaign}
+              ></RunningCampaign>
+            );
+          })}
         </div>
       </section>
 

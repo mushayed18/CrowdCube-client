@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AddNewCampaign = () => {
   const { user } = useContext(AuthContext);
@@ -52,6 +53,9 @@ const AddNewCampaign = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen mt-6">
+      <Helmet>
+        <title>Add new campaign | Crowd Cube</title>
+      </Helmet>
       <div className="w-[90%] md:w-full max-w-2xl p-6 rounded-lg shadow-2xl backdrop-blur-lg bg-white/30 my-20">
         <h2 className="text-2xl font-bold text-center mb-6">
           Add New Campaign

@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { signInUser, user, setUser, signInWithGoogle, loading, setLoading } =
@@ -19,7 +20,7 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         setUser(result.user);
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
         Swal.fire({
@@ -33,12 +34,15 @@ const Login = () => {
   const handleGoogleBtn = () => {
     signInWithGoogle().then((result) => {
       setUser(result.user);
-      navigate('/');
-    })
-  }
+      navigate("/");
+    });
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen mt-6">
+      <Helmet>
+        <title>Login | Crowd Cube</title>
+      </Helmet>
       <div className="w-[90%] md:w-full max-w-md p-6 rounded-lg shadow-2xl my-1 backdrop-blur-lg bg-white/30">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">

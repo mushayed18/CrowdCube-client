@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import Loading from "../Component/Loading";
+import { Helmet } from "react-helmet-async";
 
 const MyCampaign = () => {
   const loadedCampaigns = useLoaderData();
@@ -53,16 +54,19 @@ const MyCampaign = () => {
 
   useEffect(() => {
     if (loadedCampaigns) {
-      setLoading(false); 
+      setLoading(false);
     }
-  }, [loadedCampaigns])
+  }, [loadedCampaigns]);
 
-  if(loading) {
-    return <Loading></Loading>
+  if (loading) {
+    return <Loading></Loading>;
   }
 
   return (
     <div className="container mx-auto my-28 px-4">
+      <Helmet>
+        <title>My campaign | Crowd Cube</title>
+      </Helmet>
       <h2 className="text-2xl font-bold text-center mb-6">
         <Typewriter
           words={["My campaigns"]}

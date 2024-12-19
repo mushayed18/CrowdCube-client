@@ -1,13 +1,16 @@
-
 import { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const UpdateCampaign = () => {
   const campaign = useLoaderData();
 
-  const {user} = useContext(AuthContext);
+  const { deadline } = campaign;
+  const dateWithoutTime = deadline.split("T")[0];
+
+  const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -20,8 +23,8 @@ const UpdateCampaign = () => {
       type: form.type.value,
       description: form.description.value,
       minDonation: form.minDonation.value,
-      thumbnail: form.thumbnail.value, 
-      deadline: form.deadline.value, 
+      thumbnail: form.thumbnail.value,
+      deadline: form.deadline.value,
       name: form.name.value,
       email: form.email.value,
     };
@@ -43,13 +46,16 @@ const UpdateCampaign = () => {
             text: "Your campaign has been updated.",
           });
           form.reset();
-          navigate(`/my-campaigns/${user?.email}`)
+          navigate(`/my-campaigns/${user?.email}`);
         }
       });
   };
 
   return (
     <div className="container mx-auto my-28 px-4 flex flex-col items-center">
+      <Helmet>
+        <title>Update Campaign | Crowd Cube</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-center mb-8">Update Campaign</h2>
 
       <form
@@ -121,7 +127,7 @@ const UpdateCampaign = () => {
           <input
             type="date"
             name="deadline"
-            defaultValue={campaign.deadline}
+            defaultValue={dateWithoutTime}
             className="w-full border rounded-md p-3 focus:outline-none"
             required
           />
