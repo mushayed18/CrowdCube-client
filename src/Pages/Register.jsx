@@ -29,7 +29,7 @@ const Register = () => {
 
   const handleGoogleBtn = () => {
     signInWithGoogle().then((result) => {
-      fetch("http://localhost:5000/users", {
+      fetch("https://crowdcube-server-sigma.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +40,7 @@ const Register = () => {
         }),
       })
         .then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((json) => {});
 
       setUser(result.user);
       navigate("/");
@@ -77,7 +77,7 @@ const Register = () => {
         const newUser = { name, email };
 
         updateUserProfile({ displayName: name, photoURL: photo }).then(() => {
-          fetch("http://localhost:5000/users", {
+          fetch("https://crowdcube-server-sigma.vercel.app/users", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -85,10 +85,9 @@ const Register = () => {
             body: JSON.stringify(newUser),
           })
             .then((response) => response.json())
-            .then((json) => console.log(json));
+            .then((json) => setValid(""));
 
           navigate("/");
-          setValid("");
         });
       })
       .catch((error) => {

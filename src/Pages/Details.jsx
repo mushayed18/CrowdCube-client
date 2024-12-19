@@ -43,7 +43,7 @@ const Details = () => {
       return;
     }
 
-    fetch("http://localhost:5000/all-donations", {
+    fetch("https://crowdcube-server-sigma.vercel.app/all-donations", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,9 +52,6 @@ const Details = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        console.log(user);
-
         if (data.insertedId) {
           Swal.fire({
             icon: "success",

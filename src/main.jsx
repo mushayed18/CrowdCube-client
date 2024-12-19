@@ -28,12 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/running-campaigns"),
+        loader: () =>
+          fetch("https://crowdcube-server-sigma.vercel.app/running-campaigns"),
       },
       {
         path: "/all-campaign",
         element: <AllCampaign></AllCampaign>,
-        loader: () => fetch("http://localhost:5000/campaigns"),
+        loader: () =>
+          fetch("https://crowdcube-server-sigma.vercel.app/campaigns"),
       },
       {
         path: "/add-new-campaign",
@@ -51,7 +53,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/my-campaigns/${params.email}`),
+          fetch(
+            `https://crowdcube-server-sigma.vercel.app/my-campaigns/${params.email}`
+          ),
       },
       {
         path: "/my-donations/:email",
@@ -61,7 +65,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/my-donations/${params.email}`),
+          fetch(
+            `https://crowdcube-server-sigma.vercel.app/my-donations/${params.email}`
+          ),
       },
       {
         path: "/login",
@@ -87,7 +93,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/campaigns/${params.id}`),
+          fetch(
+            `https://crowdcube-server-sigma.vercel.app/campaigns/${params.id}`
+          ),
       },
       {
         path: "/update-campaign/:id",
@@ -97,7 +105,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/campaigns/${params.id}`),
+          fetch(
+            `https://crowdcube-server-sigma.vercel.app/campaigns/${params.id}`
+          ),
       },
     ],
   },

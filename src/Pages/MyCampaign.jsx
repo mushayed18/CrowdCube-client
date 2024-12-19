@@ -28,12 +28,11 @@ const MyCampaign = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/campaigns/${id}`, {
+        fetch(`https://crowdcube-server-sigma.vercel.app/campaigns/${id}`, {
           method: "DELETE",
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             if (json.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",

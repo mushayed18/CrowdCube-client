@@ -29,16 +29,18 @@ const UpdateCampaign = () => {
       email: form.email.value,
     };
 
-    fetch(`http://localhost:5000/campaigns/${campaign._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedCampaign),
-    })
+    fetch(
+      `https://crowdcube-server-sigma.vercel.app/campaigns/${campaign._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedCampaign),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
