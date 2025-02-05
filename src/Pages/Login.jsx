@@ -25,7 +25,7 @@ const Login = () => {
       .catch((error) => {
         Swal.fire({
           icon: "error",
-          title: "Incorrect Credential",
+          title: "Incorrect Credential!!",
           text: "Please type valid user email or password",
         });
       });
