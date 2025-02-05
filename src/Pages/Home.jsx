@@ -56,7 +56,7 @@ const Home = () => {
             At <span className="font-bold">Crowdcube</span>, we believe in
             empowering communities by bringing ideas and causes to life. Our
             platform bridges the gap between donors and dreamers, enabling
-            everyone to contribute to meaningful projects, startups, and
+            everyone to contribute to meaningful projects, startups and
             charitable causes.
           </p>
           <div className="grid md:grid-cols-3 gap-8 mt-8">
